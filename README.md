@@ -9,4 +9,22 @@
 ### NVIDIA： 3050Ti
 
 ## 软件配置
-    https://blog.csdn.net/weixin_42343975/article/details/124754154
+   参考
+   https://blog.csdn.net/weixin_42343975/article/details/124754154
+
+### Nvidia 驱动安装
+软件与更新——附加驱动中选择510
+
+    sudo apt-get update
+    sudo apt-get upgrade
+
+检查显卡驱动更新是否成功：
+
+    nvidia-smi
+
+### cmake安装
+
+    tar zxvf cmake-3.12.2-Linux-x86_64
+#### 注意路径（用户名替换）
+
+    sudo ln -sf /home/jzc/cmake-3.12.2-Linux-x86_64/bin/* /usr/bin/  
