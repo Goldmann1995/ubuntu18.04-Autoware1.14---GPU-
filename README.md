@@ -121,6 +121,7 @@ Installation Instructions:
     sudo apt-get install gcc g++
     
 下载链接，选择run文件尾
+
     https://download.qt.io/archive/qt/5.14/5.14.2/
     
     chmod a+x ./qt-opensource-linux-x64-5.14.0.run
