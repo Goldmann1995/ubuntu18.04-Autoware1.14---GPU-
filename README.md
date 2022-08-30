@@ -46,19 +46,20 @@
 
     sudo ln -sf /home/jzc/cmake-3.12.2-Linux-x86_64/bin/* /usr/bin/  
     
-### CUDA-10.0安装
+### CUDA Toolkit 11.0 Download
 下载链接
-        https://developer.nvidia.com/cuda-10.1-download-archive-base?target_os=Linux&target_arch=x86_64&target_distro=Ubuntu&target_version=1804&target_type=runfilelocal
+        https://developer.nvidia.com/cuda-11.0-download-archive?target_os=Linux&target_arch=x86_64&target_distro=Ubuntu&target_version=1804&target_type=runfilelocal
 
         参考
         https://www.cnblogs.com/chua-n/p/13208414.html
         
 Installation Instructions:
 
-    sudo sh cuda_10.1.105_418.39_linux.run
+    sudo sudo sh cuda_11.0.2_450.51.05_linux.run
     
-    echo "export PATH=$PATH:/usr/local/cuda-10.0/bin/" >> ~/.bashrc
-    echo "export CUDA_HOME=$CUDA_HOME:/usr/local/cuda-10.0" >> ~/.bashrc
+    
+    echo "export PATH=$PATH:/usr/local/cuda-11.0/bin/" >> ~/.bashrc
+    echo "export CUDA_HOME=$CUDA_HOME:/usr/local/cuda-11.0" >> ~/.bashrc
     source ~/.bashrc
 检查安装版本
 
@@ -129,10 +130,33 @@ Installation Instructions:
     
     
 
-
+### Autoware1.14源码安装
     
+#### 环境依赖
 
+    sudo apt update
 
+    sudo apt install -y python-catkin-pkg python-rosdep ros-$ROS_DISTRO-catkin
 
+    sudo apt install -y python3-pip python3-colcon-common-extensions python3-setuptools python3-vcstool
+    
+    pip3 install -U setuptools
+    
+#### 建立工作空间
+
+    mkdir -p autoware.ai/src
+    cd autoware.ai
+
+#### 下载Autoware
+
+    wget -O autoware.ai.repos "https://gitlab.com/autowarefoundation/autoware.ai/autoware/raw/1.14.0/autoware.ai.repos?inline=false"
+因网络问题可能失败，可以下载好源文件
+
+    vcs import src < autoware.ai.repos 
+    rosdep update
+    rosdep install -y --from-paths src --ignore-src --rosdistro $ROS_DISTRO
+编译
+
+    AUTOWARE_COMPILE_WITH_CUDA=1 colcon build --cmake-args -DCMAKE_BUILD_TYPE=Release
 
     
