@@ -17,6 +17,11 @@
     保存
     sudo rosdep init
     rosdep update
+ 若rosdep update出错：ERROR: error loading sources list: The read operation timed out
+ 参考：
+ 
+    https://blog.csdn.net/DDonggggg/article/details/115798335
+ 使用方法1或者方法2。 方法1复杂但是绝对有效。     
 
 ### NVIDIA： 3050Ti
 
