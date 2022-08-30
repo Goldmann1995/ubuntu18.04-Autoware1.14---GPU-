@@ -5,7 +5,19 @@
 ### Ubuntu: 18.04 (内核5.4)
     http://qiushao.net/2020/03/01/Linux/ubuntu-upgrade-kernel/index.html
 ### ROS: melodic
+
     http://wiki.ros.org/cn/melodic/Installation/Ubuntu
+#### rosdep 安装    
+
+    https://blog.csdn.net/qq_45240585/article/details/108027141
+若sudo rosdep init出错：Website may be down.
+    
+    sudo gedit /etc/hosts
+    199.232.28.133 raw.githubusercontent.com 
+    保存
+    sudo rosdep init
+    rosdep update
+
 ### NVIDIA： 3050Ti
 
 ## 软件配置
