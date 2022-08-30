@@ -48,16 +48,15 @@
     
 ### CUDA-10.0安装
 下载链接
+        https://developer.nvidia.com/cuda-10.1-download-archive-base?target_os=Linux&target_arch=x86_64&target_distro=Ubuntu&target_version=1804&target_type=runfilelocal
 
-        [https://developer.nvidia.com/cuda-10.0-download-archive?target_os=Linux](https://developer.nvidia.com/cuda-10.1-download-archive-base?target_os=Linux&target_arch=x86_64&target_distro=Ubuntu&target_version=1804&target_type=deblocal)
+        参考
+        https://www.cnblogs.com/chua-n/p/13208414.html
         
 Installation Instructions:
 
-    sudo dpkg -i cuda-repo-ubuntu1804-10-1-local-10.1.105-418.39_1.0-1_amd64.deb
-    sudo apt-key add /var/cuda-repo-<version>/7fa2af80.pub
-    sudo apt-get update
-    sudo apt-get install cuda
-
+    sudo sh cuda_10.1.105_418.39_linux.run
+    
     echo "export PATH=$PATH:/usr/local/cuda-10.0/bin/" >> ~/.bashrc
     echo "export CUDA_HOME=$CUDA_HOME:/usr/local/cuda-10.0" >> ~/.bashrc
     source ~/.bashrc
@@ -91,6 +90,48 @@ Installation Instructions:
 检查版本
 
     cat /usr/local/cuda/include/cudnn.h | grep CUDNN_MAJOR -A 2
+
+### opencv-3.4.0
+
+    unzip opencv-3.4.0.zip
+    cd opencv-3.4.0
+依赖库
+
+    sudo apt-get install build-essential libgtk2.0-dev libavcodec-dev libavformat-dev libjpeg.dev libtiff4.dev libswscale-dev libjasper-dev
+
+    mkdir build && cd build
+    cmake ..
+    make -j8 // nproc是读取CPU的核心数量 
+    sudo make install
+    
+    sudo /bin/bash -c 'echo "/usr/local/lib" > /etc/ld.so.conf.d/opencv.conf'
+    //更新库
+    sudo ldconfig
+
+    sudo gedit /etc/bash.bashrc 
+    PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/lib/pkgconfig  
+    export PKG_CONFIG_PATH
+    
+    sudo source /etc/bash.bashrc
+    //激活配置然后更新database
+    sudo updatedb 
+    
+### 安装Qt 5.14.2
+    sudo apt-get update
+    sudo apt-get install gcc g++
+    
+下载链接，选择run文件尾
+    https://download.qt.io/archive/qt/5.14/5.14.2/
+    
+    chmod a+x ./qt-opensource-linux-x64-5.14.0.run
+    ./qt-opensource-linux-x64-5.14.0.run
+    
+    
+
+
+    
+
+
 
 
     
