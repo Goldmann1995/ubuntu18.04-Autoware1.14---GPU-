@@ -45,3 +45,52 @@
 #### 注意路径（用户名替换）
 
     sudo ln -sf /home/jzc/cmake-3.12.2-Linux-x86_64/bin/* /usr/bin/  
+    
+### CUDA-10.0安装
+下载链接
+
+        [https://developer.nvidia.com/cuda-10.0-download-archive?target_os=Linux](https://developer.nvidia.com/cuda-10.1-download-archive-base?target_os=Linux&target_arch=x86_64&target_distro=Ubuntu&target_version=1804&target_type=deblocal)
+        
+Installation Instructions:
+
+    sudo dpkg -i cuda-repo-ubuntu1804-10-1-local-10.1.105-418.39_1.0-1_amd64.deb
+    sudo apt-key add /var/cuda-repo-<version>/7fa2af80.pub
+    sudo apt-get update
+    sudo apt-get install cuda
+
+    echo "export PATH=$PATH:/usr/local/cuda-10.0/bin/" >> ~/.bashrc
+    echo "export CUDA_HOME=$CUDA_HOME:/usr/local/cuda-10.0" >> ~/.bashrc
+    source ~/.bashrc
+检查安装版本
+
+    cat /usr/local/cuda/version.txt
+### cudnn安装
+下载链接
+
+    https://developer.nvidia.com/rdp/cudnn-archive
+    选择Download cuDNN v7.5.0 (Feb 25, 2019), for CUDA 10.1
+    cuDNN Runtime Library for Ubuntu18.04 (Deb)
+    cuDNN Developer Library for Ubuntu18.04 (Deb)
+    cuDNN Code Samples and User Guide for Ubuntu18.04 (Deb)
+    
+    tar zxvf cudnn-10.0-linux-x64-v7.5.0.56.tgz
+    cd cuda
+    sudo mkdir /usr/local/cuda 
+    sudo cp -r include /usr/local/cuda 
+    sudo cp -r lib64 /usr/local/cuda 
+    sudo chmod a+r /usr/local/cuda/include/cudnn.h
+    sudo chmod a+r /usr/local/cuda/lib64/libcudnn*
+    
+    sudo dpkg -i libcudnn7_7.5.0.56-1+cuda10.0_amd64.deb 
+    sudo dpkg -i libcudnn7-dev_7.5.0.56-1+cuda10.0_amd64.deb 
+    sudo dpkg -i libcudnn7-doc_7.5.0.56-1+cuda10.0_amd64.deb 
+
+    echo "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda/lib64" >> ~/.bashrc
+    source ~/.bashrc
+    
+检查版本
+
+    cat /usr/local/cuda/include/cudnn.h | grep CUDNN_MAJOR -A 2
+
+
+    
