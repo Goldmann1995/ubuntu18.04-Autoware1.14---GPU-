@@ -92,16 +92,21 @@ Installation Instructions:
 
     cat /usr/local/cuda/include/cudnn.h | grep CUDNN_MAJOR -A 2
 
-### opencv-3.4.0
+### opencv-3.4.16
 
-    unzip opencv-3.4.0.zip
-    cd opencv-3.4.0
+    unzip opencv-3.4.16.zip
+    cd opencv-3.4.16
 依赖库
 
     sudo apt-get install build-essential libgtk2.0-dev libavcodec-dev libavformat-dev libjpeg.dev libtiff4.dev libswscale-dev libjasper-dev
 
     mkdir build && cd build
     cmake ..
+    如果下载IPPICV: Download: ippicv_2020_lnx_intel64_20191018_general.tgz卡住
+    在文件目录 /opencv-3.4.16/3rdparty/ippicv/ippicv.cmake 中修改
+    "https://raw.githubusercontent.com/opencv/opencv_3rdparty/${IPPICV_COMMIT}/ippicv/"
+    为 "https://ghproxy.com/https://raw.githubusercontent.com/opencv/opencv_3rdparty/${IPPICV_COMMIT}/ippicv/"
+    
     make -j8 // nproc是读取CPU的核心数量 
     sudo make install
     
