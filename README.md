@@ -220,6 +220,10 @@ config.make 问题如下解决
     
     https://pypi.org/project/wxPython/#files
     
+    确保pip是更新的，否则后面安装步骤可能出错
+    
+    python3 -m pip install --upgrade pip setuptools wheel
+    
     pip install wxPython-4.0.7.post2.tar.gz 
     再修改源码/home/$usrname/autoware14.ai/src/autoware/utilities/runtime_manager/scripts/runtime_manager_dialog.py
     增加import wx.adv （第17行）
