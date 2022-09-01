@@ -92,10 +92,10 @@ Installation Instructions:
 
     cat /usr/local/cuda/include/cudnn.h | grep CUDNN_MAJOR -A 2
 
-### opencv-3.4.16
+### opencv-3.4.5
 
-    unzip opencv-3.4.16.zip
-    cd opencv-3.4.16
+    unzip opencv-3.4.5.zip
+    cd opencv-3.4.5
 依赖库
 
     sudo apt-get install build-essential libgtk2.0-dev libavcodec-dev libavformat-dev libjpeg.dev libtiff4.dev libswscale-dev libjasper-dev
@@ -158,10 +158,78 @@ Installation Instructions:
 因网络问题可能失败，可以下载好源文件
 
     vcs import src < autoware.ai.repos 
-    rosdep update
-    rosdep install -y --from-paths src --ignore-src --rosdistro $ROS_DISTRO
-编译
+
+编译：
+
+    复制autoware_1.14/src下的所有文件到autoware.ai/src下
+    
+    sudo apt install python-pip
+    sudo pip install rosdepc
+    sudo rosdepc init
+    rosdepc update
+    rosdepc install -y --from-paths src --ignore-src --rosdistro $ROS_DISTRO   
 
     AUTOWARE_COMPILE_WITH_CUDA=1 colcon build --cmake-args -DCMAKE_BUILD_TYPE=Release
+    
+    
+###编译出现的问题：
+找不到math_functions.hpp
+
+    sudo ln -s /usr/local/cuda/include/crt/math_functions.hpp /usr/local/cuda/include/math_functions.hpp
+
+package failed: ndt_gpu
+修改.make文件中的版本需求如10.0改11.7
+
+config.make 问题如下解决
+例如：
+
+    sudo apt-get install ros-melodic-jsk-rviz-plugins
+    sudo apt-get install ros-melodic-nmea-msgs
+
+出现sterr:kitt-player (opencv必须是3.4.5)
+
+    sudo apt-get install libopenblas-dev
+
+安装完全opencv后 配置sudo ldconfig 出现问题 /sbin/ldconfig.real: /usr/local/cuda-11.7/targets/x86_64-linux/lib/libcudnn_ops_infer.so.8 is not a symbolic link
+修改参考
+
+    https://blog.csdn.net/qq_39096302/article/details/116494406 
+    
+    或者
+    
+    sudo ln -sf /usr/local/cuda-11.7/targets/x86_64-linux/lib/libcudnn_adv_train.so.8.2.0 /usr/local/cuda-11.7/targets/x86_64-linux/lib/libcudnn_adv_train.so.8
+    sudo ln -sf /usr/local/cuda-11.7/targets/x86_64-linux/lib/libcudnn_ops_infer.so.8.2.0 /usr/local/cuda-11.7/targets/x86_64-linux/lib/libcudnn_ops_infer.so.8
+    sudo ln -sf /usr/local/cuda-11.7/targets/x86_64-linux/lib/libcudnn_cnn_train.so.8.2.0 /usr/local/cuda-11.7/targets/x86_64-linux/lib/libcudnn_cnn_train.so.8
+    sudo ln -sf /usr/local/cuda-11.7/targets/x86_64-linux/lib/libcudnn_adv_infer.so.8.2.0 /usr/local/cuda-11.7/targets/x86_64-linux/lib/libcudnn_adv_infer.so.8
+    sudo ln -sf /usr/local/cuda-11.7/targets/x86_64-linux/lib/libcudnn_ops_train.so.8.2.0 /usr/local/cuda-11.7/targets/x86_64-linux/lib/libcudnn_ops_train.so.8
+    sudo ln -sf /usr/local/cuda-11.7/targets/x86_64-linux/lib/libcudnn_cnn_infer.so.8.2.0 /usr/local/cuda-11.7/targets/x86_64-linux/lib/libcudnn_cnn_infer.so.8
+    sudo ln -sf /usr/local/cuda-11.7/targets/x86_64-linux/lib/libcudnn.so.8.2.0 /usr/local/cuda-11.7/targets/x86_64-linux/lib/libcudnn.so.8
+    
+编译期间问题参考
+
+    https://blog.csdn.net/CCCrunner/article/details/108896363
+    
+运行：
+    //必须执行
+    source install/setup.bash 
+    
+    roscd runtime_manager
+    roslaunch runtime_manager runtime_manager.launch
+    出现闪退问题：
+    
+    pip install wxPython-4.0.7.post2.tar.gz 
+    再修改源码/home/$usrname/autoware14.ai/src/autoware/utilities/runtime_manager/scripts/runtime_manager_dialog.py
+    增加import wx.adv （第17行）
+    所有wx.HyperlinkCtrl替换为wx.adv.HyperlinkCtrl (5处)
+    所有wx.EVT_HYPERLINK替换为wx.adv.EVT_HYPERLINK (5处)
+    
+    重新编译
+    
+    AUTOWARE_COMPILE_WITH_CUDA=1 colcon build --cmake-args -DCMAKE_BUILD_TYPE=Release
+    
+    
+
+
+   
 
     
