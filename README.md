@@ -225,6 +225,33 @@ config.make 问题如下解决
     python3 -m pip install --upgrade pip setuptools wheel
     
     pip install wxPython-4.0.7.post2.tar.gz 
+    
+    也可以
+    
+    tar -zxvf wxPython-4.0.7.post2.tar.gz 
+    cd wxPython-4.0.7.post2
+    python setup.py build
+    
+    
+    可能出现build错误
+    
+        问题1：No package ‘gtk+-3.0‘ found
+        解决： sudo apt install -y libgtk-3-dev
+    进入root模式
+    sudo -s
+    
+    python setup.py install
+    
+    exit
+    测试是否安装成功：
+     [lucas@b007 wxPython-2.2.5]$ python
+    Python 1.5.2 (#1, Sep 30 2000, 18:08:36)  [GCC 2.95.3 19991030 (prerelease)] on linux-i386
+    Copyright 1991-1995 Stichting Mathematisch Centrum, Amsterdam
+    >>> import wx
+    >>>
+        
+    
+    
     再修改源码/home/$usrname/autoware14.ai/src/autoware/utilities/runtime_manager/scripts/runtime_manager_dialog.py
     增加import wx.adv （第17行）
     所有wx.HyperlinkCtrl替换为wx.adv.HyperlinkCtrl (5处)
