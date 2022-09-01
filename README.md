@@ -216,6 +216,9 @@ config.make 问题如下解决
     roscd runtime_manager
     roslaunch runtime_manager runtime_manager.launch
     出现闪退问题：
+    下载：
+    
+    https://pypi.org/project/wxPython/#files
     
     pip install wxPython-4.0.7.post2.tar.gz 
     再修改源码/home/$usrname/autoware14.ai/src/autoware/utilities/runtime_manager/scripts/runtime_manager_dialog.py
