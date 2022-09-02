@@ -46,7 +46,7 @@
 
     sudo ln -sf /home/jzc/cmake-3.12.2-Linux-x86_64/bin/* /usr/bin/  
     
-### CUDA Toolkit 11.0 Download
+### CUDA Toolkit 11.0 Download （因为显卡是3050Ti和驱动装的 515.65.01,所以我装的11.7）
 下载链接
         https://developer.nvidia.com/cuda-11.0-download-archive?target_os=Linux&target_arch=x86_64&target_distro=Ubuntu&target_version=1804&target_type=runfilelocal
 
